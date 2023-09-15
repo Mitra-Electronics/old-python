@@ -1,0 +1,15 @@
+{% extends 'medium/base.html' %}
+<!-- -->
+{% block head %} {{ form.media }} {%endblock %}
+<!-- -->
+{% block featured %} {% if post.featured_image %}
+<img id="featured" src="{{post.featured_image.url}}" alt="" />{% else %}
+<img id="featured" src="http://placehold.it/1600x400?text=upload+featured+image" alt="your image" />{% endif %}{% endblock %} {% block content %}
+
+<form class="post-form" method="post" enctype="multipart/form-data" "post_form">
+    {% csrf_token %}{{form.featured_image}} {{form.title}} {{form.tags}} {{form.content}}
+
+    <button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+{% endblock %}

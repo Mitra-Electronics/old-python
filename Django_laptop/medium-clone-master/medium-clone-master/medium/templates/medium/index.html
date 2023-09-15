@@ -1,0 +1,32 @@
+{% extends 'medium/base_paginated.html' %} {% block title %}
+<h1>Recent Posts</h1> {% endblock %}
+<!-- -->
+{% block sidebar %} {% if user.is_authenticated %}
+<div class="panel panel-default">
+    <div class="panel panel-head">
+        {% if followed_posts %}
+        <h2>Followed Posts</h2>
+    </div>
+    <div class="panel panel-body">
+        {% for post in followed_posts %}
+        <h4>
+            <a href="{% url 'medium:post' pk=post.pk%}">{{post.title}}</a>
+        </h4>
+        <p class="text-muted">
+            <a href="{% url 'medium:profile' pk=post.author.pk %}">{{post.author}}</a>
+        </p>
+        <p class="text-muted">
+            {% for tag in post.tags.all %}
+            <a href="{% url 'medium:tags' tag=tag %}">{{tag}}</a>
+            {% empty %} {%endfor%}
+        </p>
+        <p>
+            {{post.content|striptags|safe|truncatechars:300}}
+        </p>
+        {% endfor %} {% else %} Start following people or topics! {% endif %}
+
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

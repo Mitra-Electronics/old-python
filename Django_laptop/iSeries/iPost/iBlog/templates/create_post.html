@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Create a post{% endblock %}
+{% block content %}
+
+<br/>
+<h1>Create a post</h1>
+
+{% if user.is_authenticated %}
+<div class = 'form-group'>
+<form method = "post">
+{% csrf_token %}
+    {{ form|crispy }}
+
+    <button class="btn btn-secondary">Post</button>
+</div>
+<script>
+    var name = "{{user.id}}";
+    document.getElementByID("id_author")
+</script>
+{% else %}
+<h1>Please sign in in order to post</h1>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<body bgcolor="Green">
+<h1>Polls Avaliable</h1>
+{% if latest_question_list %}
+<title>Polls Avaliable</title>
+<ul>
+{% for question in latest_question_list %}
+<li><h2><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></h2></li>
+{% endfor %}
+</ul>
+{% else %}
+     <title>No polls are available</title>
+     <p><h1>No polls are available.</h1></p>
+{% endif %}
+</body>
